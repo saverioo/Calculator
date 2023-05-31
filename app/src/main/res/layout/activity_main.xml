@@ -126,7 +126,7 @@
             android:text="6" />
 
         <Button
-            android:id="@+id/bSubstraction"
+            android:id="@+id/bSubtraction"
             style="@style/buttonOperator"
             android:background="@color/almostBlack"
             android:text="-" />
