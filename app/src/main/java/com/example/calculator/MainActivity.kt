@@ -155,7 +155,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun buttonNumber(b: Button, op: TextView): String {
-            //if (op.text == ".") {
                 if (canAddDecimal) {
                     when (b.text) {
                         "0" -> op.text = op.text.toString() + "0"
@@ -170,9 +169,6 @@ class MainActivity : AppCompatActivity() {
                         "9" -> op.text = op.text.toString() + "9"
                     }
                 }
-               // canAddDecimal = false
-           // } else
-                //op.text = op.text.toString() + b.text
             canAddOperation = true
             return op.text.toString()
         }
