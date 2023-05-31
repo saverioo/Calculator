@@ -14,7 +14,8 @@ import java.net.URLEncoder
 class MainActivity : AppCompatActivity() {
     // FLAG
     private var canAddOperation = false
-    private var canAddDecimal = true
+    private var canAddComma = false
+    private var check = 0
     @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
         val bcomma = findViewById<Button>(R.id.bComma)
         bcomma.setOnClickListener() {
-            operands.text = buttonOperation(findViewById<Button>(R.id.bComma), findViewById<TextView>(R.id.tvOperands))
+                operands.text = buttonComma(findViewById<Button>(R.id.bComma), findViewById<TextView>(R.id.tvOperands))
         }
 
         val bperc = findViewById<Button>(R.id.bPercentage)
@@ -155,21 +156,22 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun buttonNumber(b: Button, op: TextView): String {
-                if (canAddDecimal) {
-                    when (b.text) {
-                        "0" -> op.text = op.text.toString() + "0"
-                        "1" -> op.text = op.text.toString() + "1"
-                        "2" -> op.text = op.text.toString() + "2"
-                        "3" -> op.text = op.text.toString() + "3"
-                        "4" -> op.text = op.text.toString() + "4"
-                        "5" -> op.text = op.text.toString() + "5"
-                        "6" -> op.text = op.text.toString() + "6"
-                        "7" -> op.text = op.text.toString() + "7"
-                        "8" -> op.text = op.text.toString() + "8"
-                        "9" -> op.text = op.text.toString() + "9"
-                    }
-                }
-            canAddOperation = true
+                //if (canAddDecimal) {
+        when (b.text) {
+            "0" -> op.text = op.text.toString() + "0"
+            "1" -> op.text = op.text.toString() + "1"
+            "2" -> op.text = op.text.toString() + "2"
+            "3" -> op.text = op.text.toString() + "3"
+            "4" -> op.text = op.text.toString() + "4"
+            "5" -> op.text = op.text.toString() + "5"
+            "6" -> op.text = op.text.toString() + "6"
+            "7" -> op.text = op.text.toString() + "7"
+            "8" -> op.text = op.text.toString() + "8"
+            "9" -> op.text = op.text.toString() + "9"
+        }
+                //}
+        canAddOperation = true
+        canAddComma = true
             return op.text.toString()
         }
         @SuppressLint("SetTextI18n")
@@ -181,12 +183,25 @@ class MainActivity : AppCompatActivity() {
                     "*" -> op.text = op.text.toString() + "*"
                     "/" -> op.text = op.text.toString() + "/"
                     "%" -> op.text = op.text.toString() + "%"
-                    "." -> op.text = op.text.toString() + "."
                 }
                 canAddOperation = false
-                canAddDecimal = true
+                check = 0
+                canAddComma = false
             }
             return op.text.toString()
         }
+
+    @SuppressLint("SetTextI18n")
+    private fun buttonComma(b: Button, op: TextView): String{
+        if (canAddComma == true && check == 0) {
+            when (b.text) {
+                "." -> op.text = op.text.toString() + "."
+            }
+            canAddOperation = false
+            check = 1
+            canAddComma = false
+        }
+        return op.text.toString()
+    }
 }
 
