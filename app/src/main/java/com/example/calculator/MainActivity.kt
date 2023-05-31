@@ -1,15 +1,14 @@
 package com.example.calculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import java.net.URLEncoder
-import java.net.URLEncoder.encode
 
 class MainActivity : AppCompatActivity() {
     // FLAG
@@ -19,8 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // ID
-        var operands = findViewById<TextView>(R.id.tvOperands)
-        var result = findViewById<TextView>(R.id.tvResult)
+        val operands = findViewById<TextView>(R.id.tvOperands)
+        val result = findViewById<TextView>(R.id.tvResult)
 
         val b0 = findViewById<Button>(R.id.b0)
         val b1 = findViewById<Button>(R.id.b1)
