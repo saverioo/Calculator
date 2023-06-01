@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private var canAddOperation = false
     private var canAddComma = false
     private var check = 0
+
     @SuppressLint("CutPasteId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +115,8 @@ class MainActivity : AppCompatActivity() {
             operands.text = ""
             result.text = ""
             canAddOperation = false
+            canAddComma = false
+            check = 0
         }
 
         //SETUP BACKSPACE BUTTON
@@ -121,15 +124,23 @@ class MainActivity : AppCompatActivity() {
         bbs.setOnClickListener() {
             val length = operands.text.length
             if (length > 1) {
-                val l: String
-                l = operands.text.toString()
+                val l = operands.text.toString()
                 val c = l[length-2]
+                val x = l[length-1]
                 operands.text = operands.text.subSequence(0, length - 1)
                 //canAddOperation è false se c è = a uno di quei caratteri
                 canAddOperation = !(c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '.')
+                if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '.') {
+                    canAddComma = false
+                }else if (x == '.'){
+                    canAddComma = true
+                    check = 0
+                }
             }
             else {
                 canAddOperation = false
+                canAddComma = false
+                check = 0
                 operands.text = ""
                 result.text = ""
             }
@@ -156,7 +167,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun buttonNumber(b: Button, op: TextView): String {
-                //if (canAddDecimal) {
         when (b.text) {
             "0" -> op.text = op.text.toString() + "0"
             "1" -> op.text = op.text.toString() + "1"
@@ -169,10 +179,9 @@ class MainActivity : AppCompatActivity() {
             "8" -> op.text = op.text.toString() + "8"
             "9" -> op.text = op.text.toString() + "9"
         }
-                //}
         canAddOperation = true
         canAddComma = true
-            return op.text.toString()
+        return op.text.toString()
         }
         @SuppressLint("SetTextI18n")
         private fun buttonOperation(b: Button, op: TextView): String{
@@ -199,7 +208,6 @@ class MainActivity : AppCompatActivity() {
             }
             canAddOperation = false
             check = 1
-            canAddComma = false
         }
         return op.text.toString()
     }
