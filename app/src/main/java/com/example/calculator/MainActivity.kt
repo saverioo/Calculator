@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                 Response.Listener<String> { response ->
                     result.text = response
                 },
-                Response.ErrorListener { result.text = "That didn't work!" })
+                Response.ErrorListener { result.text = "Connection Error" })
 
 // Add the request to the RequestQueue.
             queue.add(stringRequest)
@@ -183,6 +183,7 @@ class MainActivity : AppCompatActivity() {
         canAddComma = true
         return op.text.toString()
         }
+
         @SuppressLint("SetTextI18n")
         private fun buttonOperation(b: Button, op: TextView): String{
             if (canAddOperation) {
